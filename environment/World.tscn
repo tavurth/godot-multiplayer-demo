@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://dk02rm1jcir6t"]
+
+[ext_resource type="Script" path="res://FPSCounter.gd" id="1"]
+[ext_resource type="Script" path="res://environment/world.gd" id="1_3kc3r"]
+[ext_resource type="Script" path="res://environment/WorldEnvironment.gd" id="4_6t86b"]
+[ext_resource type="PackedScene" path="res://environment/tree_scene.tscn" id="4_357ba"]
+[ext_resource type="Script" path="res://environment/player_spawner.gd" id="6_ooftj"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_iot3w"]
+
+[sub_resource type="Sky" id="8"]
+sky_material = SubResource("PanoramaSkyMaterial_iot3w")
+process_mode = 3
+
+[sub_resource type="Environment" id="7"]
+background_mode = 2
+sky = SubResource("8")
+sky_custom_fov = 80.0
+ambient_light_source = 1
+ambient_light_color = Color(0.0313726, 0.0509804, 0.00784314, 1)
+ambient_light_sky_contribution = 0.24
+reflected_light_source = 2
+tonemap_white = 0.5
+ssao_intensity = 4.0
+fog_light_color = Color(0, 0.184314, 0.121569, 1)
+fog_light_energy = 0.4
+fog_density = 0.1
+fog_sky_affect = 0.17
+fog_height = -1.5
+fog_height_density = 0.8
+volumetric_fog_density = 0.6668
+volumetric_fog_emission_energy = 114.78
+volumetric_fog_ambient_inject = 1.55
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_3kc3r")
+
+[node name="FPSCounter" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 14.0
+text = "FPS: 0"
+script = ExtResource("1")
+
+[node name="Help" type="Label" parent="."]
+offset_top = 20.0
+offset_right = 106.0
+offset_bottom = 38.0
+text = "E = Flashlight
+F = Pickup
+Click = Throw
+WASD = Move"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("7")
+script = ExtResource("4_6t86b")
+
+[node name="Sun" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.947034, -0.150134, 0.283878, -0.0169891, 0.906172, 0.422568, -0.320685, 0.395363, -0.860726, -1.47102, 43.2984, 0)
+light_color = Color(0.968627, 0.615686, 0.235294, 1)
+light_energy = 0.1
+light_indirect_energy = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Players" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2845, 1.60336, 32.2621)
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Players")
+spawn_limit = 8
+script = ExtResource("6_ooftj")
+
+[node name="TreeScene" parent="." instance=ExtResource("4_357ba")]

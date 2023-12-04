@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp8hy16y1qhy4"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_fgdj5"]
+
+[sub_resource type="SystemFont" id="SystemFont_5ea58"]
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_5a17g"]
+default_font = SubResource("SystemFont_5ea58")
+default_font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_sy0yn"]
+font_size = 48
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_fgdj5")
+
+[node name="UI" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5a17g")
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Multiplayer Test"
+label_settings = SubResource("LabelSettings_sy0yn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Host" type="Button" parent="UI/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Connect" type="Button" parent="UI/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Connect"
+
+[node name="Remote" type="LineEdit" parent="UI/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+placeholder_text = "Enter IP"
+
+[node name="Options" type="VBoxContainer" parent="UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HighQuality" type="CheckButton" parent="UI/CenterContainer/VBoxContainer/Options"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "High Quality"
+
+[node name="Level" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://environment/World.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[connection signal="pressed" from="UI/CenterContainer/VBoxContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer/Connect" to="." method="_on_connect_pressed"]
+[connection signal="toggled" from="UI/CenterContainer/VBoxContainer/Options/HighQuality" to="." method="_on_high_quality_toggled"]

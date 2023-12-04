@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmkh3cq8habrl"]
+
+[ext_resource type="Script" path="res://player/flashlight/Flashlight.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://omjtgwucwrpk" path="res://player/flashlight/flashlight.wav" id="3"]
+[ext_resource type="Texture2D" uid="uid://dhgtoq4va4egv" path="res://player/flashlight/light-cookie.png" id="3_fj5es"]
+
+[sub_resource type="Gradient" id="Gradient_im3tg"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2n8cd"]
+gradient = SubResource("Gradient_im3tg")
+fill = 1
+fill_from = Vector2(0.688034, 0)
+fill_to = Vector2(0.653846, 0.536325)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3qd0"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(1, 0.941176, 0, 0.301961)
+albedo_texture = SubResource("GradientTexture2D_2n8cd")
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sjfxb"]
+material = SubResource("StandardMaterial3D_w3qd0")
+top_radius = 0.0
+bottom_radius = 4.0
+height = 8.0
+radial_segments = 8
+rings = 1
+
+[node name="Flashlight" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("2")
+
+[node name="Flashlight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+light_energy = 12.0
+light_indirect_energy = 2.0
+light_projector = ExtResource("3_fj5es")
+shadow_enabled = true
+shadow_bias = -0.01
+shadow_reverse_cull_face = true
+spot_range = 45.0
+spot_attenuation = 1.86607
+spot_angle_attenuation = 0.615572
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3")
+
+[node name="Cone" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -4)
+mesh = SubResource("CylinderMesh_sjfxb")

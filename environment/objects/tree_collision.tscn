@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp7t8d5ysds6e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rglin"]
+radius = 1.0
+height = 200.0
+
+[node name="CollisionShape3D" type="CollisionShape3D"]
+shape = SubResource("CapsuleShape3D_rglin")

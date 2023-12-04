@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhw2o0powjnsp"]
+
+[ext_resource type="Material" path="res://environment/wall_material.tres" id="1_2s467"]
+
+[sub_resource type="BoxMesh" id="4"]
+material = ExtResource("1_2s467")
+
+[sub_resource type="BoxShape3D" id="3"]
+
+[node name="Floor" type="StaticBody3D"]
+transform = Transform3D(64, 0, 0, 0, 1, 0, 0, 0, 64, 0, -2.0364, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("4")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(64, 0, 0, 0, 1, 0, 0, 0, 64, 0, 0, 0)
+shape = SubResource("3")
