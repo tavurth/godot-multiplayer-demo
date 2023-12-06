@@ -8,6 +8,8 @@
 
 A multiplayer demo scene made in Godot 4.2
 
+https://github.com/tavurth/godot-multiplayer-demo/assets/100964/1663965a-4640-4541-917d-368bf45dca31
+
 <a id="orgcc1c9d3"></a>
 
 ## Requirements:
